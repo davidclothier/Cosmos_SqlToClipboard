@@ -17,6 +17,7 @@ Include para copiar al portapapeles de Windows el resultado de una consulta a la
 ## Limitaciones
 
 * Cada columna de la select tiene que tener como máximo 10.000 caracteres (ya sea una columna individual o la concatenación de varias)
+* Se pueden exportar un máximo de 128 columnas en la consulta
 
 ## Ejemplos
 
