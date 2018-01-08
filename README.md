@@ -54,7 +54,7 @@ end
 ### Un ejemplo con cabecera, callback y cancelación del proceso
 > La base de datos ``stock.dbs`` está copiada en el directorio raíz del proyecto
 
-> El objeto *mSqlClipboard* está declarado en la sección Variables del módulo
+> El objeto ``mSqlClipboard`` está declarado en la sección *Variables* del módulo
 ```
 private testCabeceraSeparadorYCallback
 objects
