@@ -6,7 +6,7 @@ end
 CLASSES BEGIN
 	cFTest is Form begin
 		objects begin
-			SqlClipboard as cSqlToClipboard
+			mSqlClipboard as cSqlToClipboard
 		end
 		INTERFACE
 			POSITION 0 0 560 346
@@ -52,6 +52,7 @@ end
 private testSimple
 objects
 begin
+    SqlClipboard    as cSqlToClipboard
     chrSQL          as char default ''
     intRegistros    as integer default 0
 end
@@ -105,24 +106,24 @@ begin
                  +"Stock"+chrSeparator
                  +"Last Entry Date";
 
-    SqlClipboard.init();
-    SqlClipboard.setColumnSeparator( chrSeparator );
-    SqlClipboard.setSelect( chrSQL );
-    SqlClipboard.setHeader( chrCabecera );
-    SqlClipboard.setHandleCallBack( self.Hwnd() ); // Recibimos en la ventana actual el progreso de la copia al portapapeles
-    SqlClipboard.copy();
+    mSqlClipboard.init();
+    mSqlClipboard.setColumnSeparator( chrSeparator );
+    mSqlClipboard.setSelect( chrSQL );
+    mSqlClipboard.setHeader( chrCabecera );
+    mSqlClipboard.setHandleCallBack( self.Hwnd() ); // Recibimos en la ventana actual el progreso de la copia al portapapeles
+    mSqlClipboard.copy();
 end
 
 On ExMessage (wParam as integer,lParam as integer)
 begin
     // Capturamos la información de progreso de la exportación. lParam recibe el número de fila
-    if wParam == SqlClipboard.getProgressMessageId() then
+    if wParam == mSqlClipboard.getProgressMessageId() then
     begin
         txtInfo.Text = lParam;
         Yield();
         
         // Cancelamos el proceso en la fila 150
-        if lParam == 150 then SqlClipboard.cancelQuery();
+        if lParam == 150 then mSqlClipboard.cancelQuery();
     end
 end
 
