@@ -11,7 +11,7 @@ Include para copiar al portapapeles de Windows el resultado de una consulta a la
 * Se puede añadir **una cabecera** al resultado de la consulta con el setter ``setHeader``. No es obligatorio su uso.
 * El **separador de campo** por defecto es el carácter *pipeline* ``|``, aunque puede ser cambiado con el setter ``setColumnSeparator``
 * El proceso es síncrono. Sin embargo, se puede tener un **callback** para seguir el progreso de la copia mediante el setter ``setHandleCallBack`` que recibe el handle de la ventana que captura el evento ``ExMessage`` de la clase ``cForm``. El identificador del mensaje se obtiene con el método ``getProgressMessageId``. En caso de usar el callback, el objeto instanciado deberá estar declarado en la sección *Variables* u *Objects* para poder acceder al identificador en el evento ``ExMessage`` (o bien copiar ese valor en otra variable una vez inicializado el objeto).
-* Es posible cancelar el proceso de copia mediante el método ``cancelQuery`` del objeto. Se copiarán al portapapeles todos los registros hasta el momento de la cancelación.
+* Es posible **cancelar el proceso de copia** mediante el método ``cancelQuery`` del objeto. Se copiarán al portapapeles todos los registros hasta el momento de la cancelación.
 * El método ``copy`` es el que inicia el cursor sobre la consulta y la copia al portapapeles. Devuelve el número de filas copiadas.
 
 ## Limitaciones
