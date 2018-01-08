@@ -1,0 +1,143 @@
+INCLUDES BEGIN
+	include_clipboard
+END
+CONSTANTS  begin
+end
+CLASSES BEGIN
+	cFTest is Form begin
+		objects begin
+			SqlClipboard as cSqlToClipboard
+		end
+		INTERFACE
+			POSITION 0 0 560 346
+			FONT "Arial" 8 
+			LABEL "Test SqlClipboard"
+			SYSMENU
+		BEGIN
+			CONTROL AS BOX
+				POSITION 0 0 554 317
+				FOREGROUND RGB 0 0 0
+				ATTACH ALL
+				NOLABEL
+				NOBORDER
+			BEGIN
+				CONTROL btnTestCompleto AS BUTTON
+					POSITION 334 47 170 66
+					LABEL "Test completo"
+				CONTROL txtInfo AS TEXT
+					POSITION 334 126 170 29
+					FONT "Arial" 12  CHARSET Ansi 
+					BORDER DOWN
+					ALIGNMENT CENTER
+					DATATYPE INTEGER MASK 2
+				CONTROL btnTestSimple AS BUTTON
+					POSITION 37 44 170 66
+					LABEL "Test simple"
+			END
+		END
+	end
+END
+CODE CLASS cFTest BEGIN
+//{{CODEBEGIN
+On event Click control btnTestSimple(e as event)
+begin
+    testSimple();
+end
+
+On event Click control btnTestCompleto(e as event)
+begin
+    testCabeceraSeparadorYCallback();
+end
+
+private testSimple
+objects
+begin
+    chrSQL          as char default ''
+    intRegistros    as integer default 0
+end
+begin
+    PutEnv("DBPATH", ProjectDir());
+    Sql.Connect("stock");
+
+    chrSQL = "SELECT item,"
+                 +"  supplier,"
+                 +"  description,"
+                 +"  retail_price,"
+                 +"  cost_price,"
+                 +"  stock,"
+                 +"  last_entry_date"
+            +" FROM   ITEMS";
+
+    SqlClipboard.init();
+    SqlClipboard.setSelect( chrSQL );
+    intRegistros = SqlClipboard.copy();
+    
+    MessageBox("Se han copiado "+intRegistros.Using(1)+" registros",Frame.Text,64);
+end
+
+private testCabeceraSeparadorYCallback
+objects
+begin
+    chrSQL          as char default ''
+    chrSeparator    as char default ''
+    chrCabecera     as char default ''
+end
+begin
+    PutEnv("DBPATH", ProjectDir());
+    Sql.Connect("stock");
+
+    chrSeparator = 9.Character(); // TAB como separador de campo
+
+    chrSQL = "SELECT item,"
+                 +"  supplier,"
+                 +"  description,"
+                 +"  retail_price,"
+                 +"  cost_price,"
+                 +"  stock,"
+                 +"  last_entry_date"
+            +" FROM   ITEMS";
+
+    chrCabecera = "Item"+chrSeparator
+                 +"Supplier"+chrSeparator
+                 +"Description"+chrSeparator
+                 +"Retail Price"+chrSeparator
+                 +"Cost Price"+chrSeparator
+                 +"Stock"+chrSeparator
+                 +"Last Entry Date";
+
+    SqlClipboard.init();
+    SqlClipboard.setColumnSeparator( chrSeparator );
+    SqlClipboard.setSelect( chrSQL );
+    SqlClipboard.setHeader( chrCabecera );
+    SqlClipboard.setHandleCallBack( self.Hwnd() ); // Recibimos en la ventana actual el progreso de la copia al portapapeles
+    SqlClipboard.copy();
+end
+
+On ExMessage (wParam as integer,lParam as integer)
+begin
+    // Capturamos la información de progreso de la exportación. lParam recibe el número de fila
+    if wParam == SqlClipboard.getProgressMessageId() then
+    begin
+        txtInfo.Text = lParam;
+        Yield();
+        
+        // Cancelamos el proceso en la fila 150
+        if lParam == 150 then SqlClipboard.cancelQuery();
+    end
+end
+
+//{{CODEEND
+END
+CODE BEGIN
+//{{CODEBEGIN
+main
+objects
+begin
+    f               as cFTest
+end
+begin
+    f.Run();
+end
+//{{CODEEND
+END
+

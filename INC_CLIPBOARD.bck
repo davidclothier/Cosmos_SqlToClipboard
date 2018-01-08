@@ -1,0 +1,395 @@
+INCLUDES BEGIN
+    inc_progressbar
+END
+CONSTANTS  begin
+end
+CLASSES BEGIN
+    _sFetch is Struct begin
+        c1 as Char (200)
+        c2 as Char (200)
+        c3 as Char (200)
+        c4 as Char (200)
+        c5 as Char (200)
+        c6 as Char (200)
+        c7 as Char (200)
+        c8 as Char (200)
+        c9 as Char (200)
+        c10 as Char (200)
+        c11 as Char (200)
+        c12 as Char (200)
+        c13 as Char (200)
+        c14 as Char (200)
+        c15 as Char (200)
+        c16 as Char (200)
+        c17 as Char (200)
+        c18 as Char (200)
+        c19 as Char (200)
+        c20 as Char (200)
+        c21 as Char (200)
+        c22 as Char (200)
+        c23 as Char (200)
+        c24 as Char (200)
+        c25 as Char (200)
+        c26 as Char (200)
+        c27 as Char (200)
+        c28 as Char (200)
+        c29 as Char (200)
+        c30 as Char (200)
+        c31 as Char (200)
+        c32 as Char (200)
+        c33 as Char (200)
+        c34 as Char (200)
+        c35 as Char (200)
+        c36 as Char (200)
+        c37 as Char (200)
+        c38 as Char (200)
+        c39 as Char (200)
+        c40 as Char (200)
+        c41 as Char (200)
+        c42 as Char (200)
+        c43 as Char (200)
+        c44 as Char (200)
+        c45 as Char (200)
+        c46 as Char (200)
+        c47 as Char (200)
+        c48 as Char (200)
+        c49 as Char (200)
+        c50 as Char (200)
+        c51 as Char (200)
+        c52 as Char (200)
+        c53 as Char (200)
+        c54 as Char (200)
+        c55 as Char (200)
+        c56 as Char (200)
+        c57 as Char (200)
+        c58 as Char (200)
+        c59 as Char (200)
+        c60 as Char (200)
+        c61 as Char (200)
+        c62 as Char (200)
+        c63 as Char (200)
+        c64 as Char (200)
+        c65 as Char (200)
+        c66 as Char (200)
+        c67 as Char (200)
+        c68 as Char (200)
+        c69 as Char (200)
+        c70 as Char (200)
+        c71 as Char (200)
+        c72 as Char (200)
+        c73 as Char (200)
+        c74 as Char (200)
+        c75 as Char (200)
+        c76 as Char (200)
+        c77 as Char (200)
+        c78 as Char (200)
+        c79 as Char (200)
+        c80 as Char (200)
+        c81 as Char (200)
+        c82 as Char (200)
+        c83 as Char (200)
+        c84 as Char (200)
+        c85 as Char (200)
+        c86 as Char (200)
+        c87 as Char (200)
+        c88 as Char (200)
+        c89 as Char (200)
+        c90 as Char (200)
+        c91 as Char (200)
+        c92 as Char (200)
+        c93 as Char (200)
+        c94 as Char (200)
+        c95 as Char (200)
+        c96 as Char (200)
+        c97 as Char (200)
+        c98 as Char (200)
+        c99 as Char (200)
+        c100 as Char (200)
+        c101 as Char (200)
+        c102 as Char (200)
+        c103 as Char (200)
+        c104 as Char (200)
+        c105 as Char (200)
+        c106 as Char (200)
+        c107 as Char (200)
+        c108 as Char (200)
+        c109 as Char (200)
+        c110 as Char (200)
+        c111 as Char (200)
+        c112 as Char (200)
+        c113 as Char (200)
+        c114 as Char (200)
+        c115 as Char (200)
+        c116 as Char (200)
+        c117 as Char (200)
+        c118 as Char (200)
+        c119 as Char (200)
+        c120 as Char (200)
+        c121 as Char (200)
+        c122 as Char (200)
+        c123 as Char (200)
+        c124 as Char (200)
+        c125 as Char (200)
+        c126 as Char (200)
+        c127 as Char (200)
+        c128 as Char (200)
+        
+        
+    end
+    cFProceso3 is Form begin
+        objects begin
+        end
+        INTERFACE
+            POSITION 0 0 389 100
+            BACKGROUND COLOR white
+            FONT "Arial" 8
+            LABEL "Sending to Clipboard..."
+        BEGIN
+            CONTROL AS BOX
+                POSITION 0 0 383 72
+                FOREGROUND RGB 0 0 0
+                ATTACH ALL
+                NOLABEL
+                NOBORDER
+            BEGIN
+                CONTROL prgBarra AS PERCENT
+                    POSITION 16 41 349 22
+                    BORDER ETCHED
+                    RANGE 1 100
+                CONTROL txtInfo AS TEXT
+                    POSITION 26 11 272 22
+                    FOREGROUND COLOR darkblue
+                    FONT "Tahoma" 12
+                    NOBORDER
+                    DATATYPE CHAR
+            END
+        END
+    end
+    _aLineas is Array [1] of Char (10000)
+END
+objects begin
+    sFetch AS _sFetch
+    oFProceso3 AS cFProceso3
+    COPY_PATH AS Char
+end
+CODE CLASS _sFetch BEGIN
+//{{CODEBEGIN
+public MontaLinea( pintCols as integer ) return char
+objects
+begin
+    intI            as integer default 0
+    chrCadena       as char default ''
+    chrCampo        as char default ''
+    chrValor        as char default ''
+end
+begin
+    // Recorremos los campos de la estructura que reciben información
+    for intI = 1 to pintCols do
+    begin
+        // Quitamos nulos
+        chrCampo = "c"+intI.Char;
+        EvalVar( chrCampo.Trim, chrValor );
+        if chrValor is null then AsgVar( chrCampo.Trim, "" );
+
+        // Montamos la línea
+        chrCadena += chrValor + 9.Character();
+    end
+
+    chrCadena = chrCadena[1,chrCadena.Length-1];
+    chrCadena += 13.Character + 10.Character();
+
+    return chrCadena;
+end
+//{{CODEEND
+END
+CODE CLASS cFProceso3 BEGIN
+//{{CODEBEGIN
+On Open
+begin
+    self.SetIcon(COPY_PATH+"iconos\menu\portapapelesw.ico",COPY_PATH+"iconos\menu\portapapelesw.ico");
+end
+//{{CODEEND
+END
+CODE CLASS _aLineas BEGIN
+//{{CODEBEGIN
+public Reset
+begin
+    self.Resize( 1 );
+    self[1] = "";
+end
+
+public Add( pchrLinea as char )
+objects
+begin
+    intI            as integer default 0
+end
+begin
+    // Si el ancho de la cadena que vamos a agregar es mayor
+    // que el disponible para el elemento actual del array,
+    // entonces redimensionamos array (evitamos el desbordamiento).
+    if pchrLinea.Length > (10000 - self[self.Size].Length) then self.Resize( self.Size+1 );
+
+    // Añadimos línea a la cadena del elemento del array en curso
+    self[self.Size] += pchrLinea;
+end
+
+public Ancho return integer
+begin
+    // El ancho de la cadena completa es el tamaño de cada elemento completo
+    // más el tamaño del último elemento.
+    switch self.Size()
+    begin
+        case 1:
+        begin
+            return self[1].Length;
+        end
+        case > 1:
+        begin
+            return (((self.Size-1)*10000) + (self[self.Size].Length));
+        end
+    end
+end
+//{{CODEEND
+END
+CODE BEGIN
+//{{CODEBEGIN
+{+----------- Copyright © 2001-2010, Actions Data S.L. ----------------------+
+ |                                                                           |
+ | Modulo: INC_CLIPBOARD - Exportación segmentador a Portapapeles de Windows |
+ | Autor:  David Ropero                                                      |
+ | Fecha:  Septiembre 2010                                                   |
+ |                                                                           |
+ +---------------------------------------------------------------------------+}
+
+
+// Declaración de funciones de la API de Windows
+
+public dll "user32.dll" SetClipboardData( wFormat   as integer,
+                                          hMem      as integer ) return integer
+
+public dll "user32.dll" CloseClipboard() return integer
+
+public dll "user32.dll" OpenClipboard( hwnd as integer ) return integer
+
+public dll "user32.dll" GetClipboardData( wFormat as integer ) return integer
+
+public dll "kernel32.dll" lstrlenA( lpString as integer ) return integer
+
+public dll "kernel32.dll" RtlMoveMemory( VAR pDst       as char,
+                                             pSrc       as integer,
+                                             ByteLen    as integer )
+
+public dll "kernel32.dll" GlobalAlloc (uFlags as integer, dwBytes as integer) return integer
+
+public dll "kernel32.dll" GlobalLock (hMem as integer) return integer
+
+public dll "kernel32.dll" GlobalUnlock (hMem as integer) return integer
+
+public dll "user32.dll" EmptyClipboard() return integer
+
+public dll "kernel32.dll" lstrcpy (lpString1 as integer, lpString2 as char) return integer
+
+// Función pública de envío de datos
+public SendClipboardSQL( pchrSQL        as char,
+                         pintCuantos    as integer,
+                         pintNumCols    as integer,
+                         pchrCabecera   as char,
+                         pSqlServer     as SqlServer default null ) return integer
+objects
+begin
+    r1              as SqlCursor
+    chrLinea        as char default ''
+    intGblMem       as integer default 0
+    intPntGblMem    as integer default 0
+    intPntClipMem   as integer default 0
+    intCounter      as integer default 0
+    intRetCount     as integer default 0
+    intOffset       as integer default 0
+    aLineas         as _aLineas
+    intI            as integer default 0
+    blnError        as boolean default false
+end
+begin
+    // Lanzamos ventana de información
+    ADProceso.Reset();
+    ADProceso.SetRange( 1, pintCuantos );
+    ADProceso.SetPos( 1 );
+    ADProceso.SetYield( 100 );
+    ADProceso.Open();
+
+    // Inicializamos array que almacena la cadena troceada del texto a copiar
+    aLineas.Reset();
+
+    // Si hay cabecera, se la pasamos como primera linea
+    if pchrCabecera is not null and pchrCabecera.Trim.Length > 0 then
+    begin
+        pchrCabecera += 13.Character + 10.Character();
+        aLineas.Add( pchrCabecera );
+    end
+    
+    // Cursor de consulta (guardamos resultado en estructura)
+    intCounter = 0;
+
+    if pSqlServer is not null then r1.AttachServer( pSqlServer );
+    r1.Prepare( pchrSQL );
+    r1.Open();
+    while r1.Fetch( sFetch ).Found do
+    begin
+        // Montamos la cadena
+        chrLinea = "";
+        chrLinea = sFetch.MontaLinea( pintNumCols );
+
+        // Agregamos la cadena al array
+        aLineas.Add( chrLinea );
+
+        // Información del proceso
+        ++intRetCount;
+        ++intCounter;
+        ADProceso.SetMensaje( intCounter.Using(2) +" -> "+pintCuantos.Using(2)+" ...");
+        ADProceso.SetPos( intCounter );
+    end
+    r1.Close.Free();
+
+    // Reservamos memoria
+    intGblMem = GlobalAlloc( 66, aLineas.Ancho );
+    // Bloqueamos el espacio de memoria
+    intPntGblMem = GlobalLock( intGblMem );
+
+    // Recorremos el array
+    intOffset = 0;
+    for intI = 1 to aLineas.Size do
+    begin
+        // Ubicamos cadena en memoria (en posición consecutiva a la línea anterior)
+        intPntGblMem = lstrcpy( intPntGblMem + intOffset, aLineas[intI] );
+
+        // Desplazamos offset en función del tamaño de la cadena
+        intOffset = aLineas[intI].Length;
+    end
+
+    // Desbloqueamos espacio de memoria reservado
+    if GlobalUnlock( intGblMem ) != 0 then
+    begin
+        MessageBox("Memory Error","Clipboard",16);
+        blnError = TRUE;
+    end
+
+    // Abrimos el portapapeles
+    OpenClipboard( NULL );
+
+    // Lo vaciamos
+    if NOT blnError then EmptyClipboard();
+
+    // Copiamos bloque de memoria
+    if NOT blnError then intPntClipMem = SetClipboardData( 1, intGblMem );
+
+    // Cerramos el portapapeles
+    CloseClipboard();
+
+    // Cerramos ventana información proceso
+    ADProceso.Close();
+
+    return intRetCount;
+end
+//{{CODEEND
+END
+
