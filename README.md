@@ -1,4 +1,4 @@
-[<img src="http://www.base100.com/images/productos/cosmos.png" alt="Cosmos" width="72"/>](http://www.base100.com/es/productos/cosmos01.html)
+[<img src="http://www.base100.com/images/productos/cosmos.png" alt="Cosmos" width="72"/>](https://cosmosrad.tech/en/home/)
 
 # Sql to Clipboard include
 Include para copiar al portapapeles de Windows el resultado de una consulta a la base de datos.
