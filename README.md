@@ -115,7 +115,7 @@ end
 
 ## Contacto
 
-* David Ropero Alcázar - david.ropero@gmail.com
+* David Ropero - david.ropero@gmail.com
 
 [<img src="https://image.freepik.com/iconos-gratis/boton-del-logotipo-de-twitter_318-85053.jpg" alt="Twitter" width="32"/>](https://twitter.com/clothierdroid)
 [<img src="http://www.iconsdb.com/icons/preview/black/linkedin-4-xxl.png" alt="Linkedin" width="32"/>](http://www.linkedin.com/in/davidropero)
